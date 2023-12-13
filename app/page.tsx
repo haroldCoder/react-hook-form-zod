@@ -2,7 +2,7 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema, mappedPlans } from "@/validations/userSchema"
-import { animate, motion } from "framer-motion"
+import { PanInfo, animate, motion } from "framer-motion"
 import { useState } from "react";
 
 type Inputs = {
@@ -45,8 +45,13 @@ export default function Home() {
         >
           <section className='flex flex-col w-[100%] gap-y-2'>
             <label htmlFor="name">Name</label>
-            <motion.input  whileTap={{translateX: 50}}  type="text" className="text-gray-600 my-2 p-1 rounded-sm" id='name' {...register("name")} />
-            {errors.name?.message && <p>{errors.name?.message}</p>}
+            <motion.input whileTap={{ translateX: 50 }} type="text" className="text-gray-600 my-2 p-1 rounded-sm" id='name' {...register("name")} />
+            <motion.div
+              layout transition={{ duration: 0.3 }}
+            >{
+                errors.name?.message && <p className="text-red-500">{errors.name?.message}</p>
+              }
+            </motion.div>
           </section>
         </motion.div>
 
@@ -54,24 +59,48 @@ export default function Home() {
           <label htmlFor="email">Email</label>
           <input type="email" className='text-gray-600 p-1 rounded-sm' id='email'
             {...register("email")} />
+          <motion.div
+            layout transition={{ duration: 0.3 }}
+          >{
+              errors.email?.message && <p className="text-red-600">{errors.email?.message}</p>
+            }
+          </motion.div>
         </section>
 
         <section className='flex flex-col w-[100%] gap-y-2'>
           <label htmlFor="password">Password</label>
           <input type="password" className='text-gray-600 p-1 rounded-sm' id='password'
             {...register("password")} />
+          <motion.div
+            layout transition={{ duration: 0.3 }}
+          >{
+              errors.password?.message && <p className="text-red-600">{errors.password?.message}</p>
+            }
+          </motion.div>
         </section>
 
         <section className='flex flex-col w-[100%] gap-y-2'>
           <label htmlFor="repeatpassword">Repeat password</label>
           <input type="repeatpassword" className='text-gray-600 p-1 rounded-sm' id='repeatpassword'
             {...register("repeatPassword")} />
+          <motion.div
+            layout transition={{ duration: 0.3 }}
+          >{
+              errors.repeatPassword?.message && <p className="text-red-600">{errors.repeatPassword?.message}</p>
+            }
+          </motion.div>
         </section>
 
         <section className='flex flex-col w-[100%] gap-y-2'>
           <label htmlFor="weight">Weight</label>
           <input type="number" className='text-gray-600 p-1 rounded-sm' id='weight'
             {...register("weight")} />
+          <motion.div
+            layout transition={{ duration: 0.3 }}
+          >{
+              errors.weight?.message && <p className="text-red-600">{errors.weight?.message}</p>
+            }
+          </motion.div>
         </section>
 
         <section className='flex flex-col w-[100%] gap-y-2'>
@@ -80,8 +109,14 @@ export default function Home() {
           <select className='text-gray-600 p-2 rounded-sm' id="plan"
             {...register("plan")} >
             {plansOptions}
-          </select>
 
+          </select>
+          <motion.div
+            layout transition={{ duration: 0.3 }}
+          >{
+              errors.plan?.message && <p className="text-red-600">{errors.plan?.message}</p>
+            }
+          </motion.div>
         </section>
 
         <motion.button
