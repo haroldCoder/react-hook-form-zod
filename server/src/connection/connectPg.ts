@@ -13,12 +13,11 @@ class ConnectPg{
         })
     }
 
-    isConnect = () =>{
-        this.sql.on('connect', ()=>{
-            console.log(`pg db connect`);
-        })
+    isConnect = async() =>{
+        await this.sql.connect()
+        console.log(`pg db connect`);
 
-        this.sql.on('error', (err) => {
+        await this.sql.on('error', (err) => {
             console.error('Error connecting to PostgreSQL database', err);
         });
     }

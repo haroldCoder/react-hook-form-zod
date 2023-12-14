@@ -3,6 +3,10 @@ import {graphqlHTTP} from "express-graphql"
 import { clients } from "./graphql/schemas/client";
 import Clients from "./graphql/mutations/clients";
 import ConnectPg from "./connection/connectPg";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 
 const app = express();
 const clientsobj = new Clients();
