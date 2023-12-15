@@ -3,6 +3,7 @@ import { buildSchema } from "graphql";
 
 export const clients = buildSchema(`
     type Clients{
+        id: Int
         name: String,
         email: String,
         password: String,
@@ -20,10 +21,11 @@ export const clients = buildSchema(`
 
     type Query{
        getClients: [Clients],
-       
     }
 
     type Mutation{
         saveClient(client: ClientInput): String
+        deleteClient(id: Int): String
+        updateClient(id: Int, client: ClientInput): String
     }
 `)
