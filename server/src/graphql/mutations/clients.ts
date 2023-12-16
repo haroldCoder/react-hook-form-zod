@@ -1,4 +1,3 @@
-import { number, string } from "zod";
 import ConnectPg from "../../connection/connectPg";
 import { Clientstype } from "../../types";
 
