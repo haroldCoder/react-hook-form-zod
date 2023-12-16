@@ -7,32 +7,31 @@ class Clients extends ConnectPg {
     constructor() {
         super();
     }
-    getClients = (): Array<Clientstype> | undefined => {
-        try {
-            this.sql.query(`SELECT * FROM clients`, (err, { rows }: { rows: Array<Clientstype> }) => {
-                return rows;
-            });
+    getClients = async() => {
+        try{
+            const {rows}: { rows: Array<Clientstype> } = await this.sql.query(`SELECT * FROM clients`);
+            return rows
         }
-        catch (err) {
-            return [];
+        catch(err){
+            console.log(err);
+            return []
         }
+        
     }
 
     saveClient = ({ client }: { client: Clientstype }): string => {
         try {
-            this.sql.query(`INSERT INTO clients(name, email, password, weight, plan) VALUES("${client.name}","${client.email}","${client.password}",${client.password},"${client.plan}")`, (err, result) => {
+            this.sql.query(`INSERT INTO clients(name, email, password, weight, plan) VALUES('${client.name}','${client.email}','${client.password}', ${client.weight},'${client.plan}')`, (err, result) => {
                 if (err) {
                     console.log(err);
                     throw err;
                 }
-                return "client save"
             })
+            return "client save"
         }
         catch (err) {
             return `ocurred error ${err}`
         }
-
-        return ""
     }
 
     deleteClient = ({ id }: { id: number }): string => {
@@ -42,14 +41,13 @@ class Clients extends ConnectPg {
                     console.log(err);
                     throw err;
                 }
-                return "client removed"
             })
+
+            return "client removed"
         }
         catch (err) {
             return `ocurred error ${err}`
         }
-
-        return ""
     }
 
     updateClient = async({id, client}: {id: number, client: Clientstype}): Promise<string> =>{

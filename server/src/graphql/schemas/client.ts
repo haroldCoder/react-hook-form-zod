@@ -20,7 +20,7 @@ export const clients = buildSchema(`
     }
 
     type Query{
-       getClients: [Clients],
+       getClients: [Clients]!,
     }
 
     type Mutation{
