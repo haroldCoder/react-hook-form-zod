@@ -4,6 +4,7 @@ import { clients } from "./graphql/schemas/client";
 import Clients from "./graphql/mutations/clients";
 import ConnectPg from "./connection/connectPg";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ dotenv.config();
 const app = express();
 const clientsobj = new Clients();
 const pgconnect = new ConnectPg();
+app.use(cors())
 
 app.use("/graphql", graphqlHTTP({
     schema: clients,
